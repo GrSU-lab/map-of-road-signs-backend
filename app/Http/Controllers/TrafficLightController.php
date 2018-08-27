@@ -81,6 +81,10 @@ class TrafficLightController extends Controller
     public function store()
     {
 
+        $this->validate(request(), [
+            'input_img' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg|max:8192',
+        ]);
+
         $imageName = time().'.'.request()->input_img->getClientOriginalExtension();
         request()->input_img->move(public_path('trafficlights'), $imageName);   
 
