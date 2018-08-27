@@ -16,8 +16,7 @@ class CreateTrafficLightsTable extends Migration
         Schema::create('traffic_lights', function (Blueprint $table) {
             $table->increments('id');
             $table->string('image_path');
-            $table->float('lat');
-            $table->float('long');
+            $table->point('location')->nullable();
             $table->timestamps();
         });
     }

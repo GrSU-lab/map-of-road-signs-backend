@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\Request;
 use App\TrafficLight;
 
@@ -81,22 +82,23 @@ class TrafficLightController extends Controller
     public function store()
     {
 
+        //validate request
         $this->validate(request(), [
             'input_img' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg|max:8192',
         ]);
 
+        //put image to the server
         $imageName = time().'.'.request()->input_img->getClientOriginalExtension();
         request()->input_img->move(public_path('trafficlights'), $imageName);   
 
+        //get image path and location information
         $photoPath = addslashes(public_path('trafficlights')."\\".$imageName);
         $point = $this->read_gps_location($photoPath);
 
+        //create model and safe it into database
         $light = new TrafficLight;
-
         $light->image_path="trafficlights\\".$imageName;
-        $light->lat=$point['lat'];
-        $light->long=$point['lng'];
-
+        $light->location = new Point($point['lat'],$point['lng']); // (lat, lng)
         $light->save();
 
         return redirect('/')->with('success','Image Upload successfully');
