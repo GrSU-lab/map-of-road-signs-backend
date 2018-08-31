@@ -24,8 +24,7 @@ Route::get('/lights/delete/{light}','TrafficLightController@delete');
 Route::get('/lights/create','TrafficLightController@create');
 Route::post('/lights/post','TrafficLightController@store');
 
-Route::get('lights/all','TrafficLightController@index');
-Route::get('lights/{light}','TrafficLightController@show');
+
 
 Route::get('lights/{light}/addpic','LightController@addpic');
 
