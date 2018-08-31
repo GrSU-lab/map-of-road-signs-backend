@@ -17,14 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/lights/show/all','LightController@index');
+Route::get('/lights/create','LightController@create');
+Route::post('/lights/post','LightController@store');
 Route::get('/lights/show/{light}','LightController@show');
 Route::post('/lights/{light}/pictures','LightController@addpic');
 
-Route::get('/lights/delete/{light}','TrafficLightController@delete');
-Route::get('/lights/create','TrafficLightController@create');
-Route::post('/lights/post','TrafficLightController@store');
 
 
 
-Route::get('lights/{light}/addpic','LightController@addpic');
+
 
