@@ -11,5 +11,6 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.copy('node_modules/jquery-colorbox/example1/', 'public/assets/css')
+   .copy('node_modules/jquery-colorbox/jquery.colorbox-min.js', 'public/assets/js')
+   .copy('node_modules/jquery/dist/jquery.js', 'public/assets/js');

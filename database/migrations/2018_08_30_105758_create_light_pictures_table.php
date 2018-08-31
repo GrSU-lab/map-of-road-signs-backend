@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTrafficLightsTable extends Migration
+class CreateLightPicturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTrafficLightsTable extends Migration
      */
     public function up()
     {
-        Schema::create('traffic_lights', function (Blueprint $table) {
+        Schema::create('light_pictures', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('light_id');
             $table->string('image_path');
-            $table->point('location')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTrafficLightsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('traffic_lights');
+        Schema::dropIfExists('light_pictures');
     }
 }
