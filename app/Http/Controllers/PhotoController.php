@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use App\Photo;
 use Symfony\Component\HttpFoundation\Response;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class PhotoController extends Controller
 {
@@ -23,6 +24,13 @@ class PhotoController extends Controller
         return view('photos.upload');
     }
 
+    public function createIcon($image_path, $image_name)
+    {
+        $img_resize = Image::make($image_path);
+        $img_resize->resize(50, 50);
+        $img_resize->save(public_path('files/icons/ico' .$image_name));
+    }
+
     public function show($id)
     {
         $photo = Photo::where('id',$id)->first();
@@ -36,18 +44,15 @@ class PhotoController extends Controller
     }
 
     public function store()
-    {;
-        echo 'kek';
+    {
         $imageName = time().'.'.request()->input_img->getClientOriginalExtension();
-        request()->input_img->move(storage_path('app/public'), $imageName);
-        echo storage_path('app/public'), $imageName;
-        $photoPath = addslashes(storage_path('app/public')."\\".$imageName);
-        echo $photoPath;
-        $point = $this->read_gps($photoPath);
+        request()->input_img->move(public_path('files'), $imageName);
+        $photoPath = addslashes(public_path('files')."\\".$imageName);
 
         $photo = new Photo;
-
         $photo->image_url=$photoPath;
+        $point = $this->read_gps($photoPath);
+        $this->createIcon($photoPath, $imageName);
         $photo->coordinates = new Point($point['lat'],$point['lon']);
         $photo->save();
 
