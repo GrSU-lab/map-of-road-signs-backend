@@ -6,7 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+<<<<<<< HEAD
         "barryvdh/laravel-": "^0.4.0",
+=======
+        "barryvdh/laravel-elfinder": "^0.4.0",
+>>>>>>> cdf68d877da7d4f282c0174762ff0756286a4dc7
         "fideloper/proxy": "~3.3",
         "grimzy/laravel-mysql-spatial": "^2.1",
         "intervention/image": "^2.4",
