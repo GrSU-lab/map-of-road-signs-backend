@@ -6,6 +6,12 @@
 </head>
 <body>
 
+<?php
+var_dump(gd_info());
+?>
+
+<?php phpinfo(); ?>
+
 <script type="text/javascript" src="\assets\js\jquery.js"></script>
 <script type="text/javascript" src="\assets\js\jquery.colorbox-min.js"></script>
 

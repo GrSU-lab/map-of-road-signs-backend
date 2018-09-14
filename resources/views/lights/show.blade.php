@@ -7,7 +7,6 @@
 <body>
 <h1>{{$light}}</h1>
 <br>
-<h1>{{$light->pictures}}</h1>
 
 <script type="text/javascript" src="\assets\js\jquery.js"></script>
 <script type="text/javascript" src="\assets\js\jquery.colorbox-min.js"></script>

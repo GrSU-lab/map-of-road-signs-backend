@@ -9,8 +9,14 @@ class Light extends Model
 {
     public function pictures()
     {
-
         return $this->hasMany(LightPicture::class);
+    }
+    public function lightdelete()
+    {
+        // delete all related photos 
+        $this->pictures()->delete();
+        
+        return parent::delete();
     }
     use SpatialTrait;
 

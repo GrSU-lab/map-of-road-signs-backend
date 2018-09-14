@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\LightController;
 
 return array(
 
@@ -76,7 +77,13 @@ return array(
     |
     */
 
-    'options' => array(),
+'options' => array(
+    'bind' => array(
+        'upload' => array( $instance = new LightController,
+            'createicon'
+        )
+    )
+),
     
     /*
     |--------------------------------------------------------------------------
