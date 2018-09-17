@@ -23,6 +23,7 @@ Route::get('/photo/create','PhotoController@create');
 Route::post('/photo/post','PhotoController@store');
 
 Route::get('photo/all','PhotoController@index');
+Route::get('photo/{name}','PhotoController@index_one');
 Route::get('photo/{photo}','PhotoController@show');
 
 

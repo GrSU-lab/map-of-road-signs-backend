@@ -17,5 +17,9 @@ class Photo extends Model
         'coordinates'
     ];
 
+    public function expose() {
+        return get_object_vars($this);
+    }
+
     //protected $geometry = ['coordinates'];
 }

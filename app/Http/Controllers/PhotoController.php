@@ -12,11 +12,28 @@ class PhotoController extends Controller
 {
     public function index()
     {
-        //$photo = new Photo;
-        //$photo->image_url="/photo";
-        //$photo->coordinates = new Point(40.74894149554006, -73.98615270853043);
-       // $photo->save();
-        return Photo::all();
+        $dir = public_path('\\files\\lights\\');
+        $images = scandir($dir); 
+        $arr=[];
+        $sum=[];
+        foreach ($images as $image)
+        {   
+            if (!($image=="."||$image==".."||$image=="ico"))
+            {
+                $sum = $image;
+                $img=['name' => public_path('\\files\\lights\\').$image, 'name_ico' => public_path('\\files\\lights\\ico\\').$image, 'location' => $this->read_gps(public_path('\\files\\lights\\').$image)];
+                array_push($arr, $img);
+            }
+        }  
+        $photos=json_encode($arr);
+        return view('photos.index', compact('photos')); 
+    }
+
+    public function index_one($name)
+    {
+        $img=['name' => public_path('\\files\\lights\\').$name, 'name_ico' => public_path('\\files\\lights\\ico\\').$name, 'location' => $this->read_gps(public_path('\\files\\lights\\').$name)];
+        $photo=json_encode($img);
+        return view('photos.index_one', compact('photo'));
     }
 
     public function create()
@@ -37,9 +54,10 @@ class PhotoController extends Controller
         return view('photos.show', compact('photo'));
     }
 
-    public function delete($id)
+    public function delete($name)
     {
-        Photo::destroy($id);
+        unlink(public_path('\\files\\lights\\').$name);
+        unlink(public_path('\\files\\lights\\ico\\').$name);
         return redirect('/');
     }
 
