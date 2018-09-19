@@ -21,7 +21,8 @@ class PhotoController extends Controller
             if (!($image=="."||$image==".."||$image=="ico"))
             {
                 $sum = $image;
-                $img=['name' => public_path('\\files\\lights\\').$image, 'name_ico' => public_path('\\files\\lights\\ico\\').$image, 'location' => $this->read_gps(public_path('\\files\\lights\\').$image)];
+                $coord=$this->read_gps(public_path('\\files\\lights\\').$image);
+                $img=['images' => [public_path('\\files\\lights\\').$image], 'images_ico' => [public_path('\\files\\lights\\ico\\').$image], 'location' => [ $coord['lat'], $coord['lon']]];
                 array_push($arr, $img);
             }
         }  

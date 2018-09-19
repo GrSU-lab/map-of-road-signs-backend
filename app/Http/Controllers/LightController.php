@@ -13,7 +13,10 @@ class LightController extends Controller
     {
         //dd("sadas");
         $lights = Light::all();
-        //dd($lights);
+        foreach($lights as $light)
+        {
+            $light['location']=[$light['location']->getLat(), $light['location']->getLng()];
+        }
         return view('lights.index', compact('lights'));
     }
     public function addpic(Light $light)
@@ -44,8 +47,8 @@ class LightController extends Controller
     public function show($id)
     {
         $light = Light::where('id', $id)->first();
-        $someVar = $light->pictures;
-        $light['pictures'] = $someVar->toArray();
+        $someVar = $light->images;
+        $light['images'] = $someVar->toArray();
         //dd($someVar->toArray());
         return view('lights.show', compact('light'));
     }

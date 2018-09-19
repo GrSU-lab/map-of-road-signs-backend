@@ -7,14 +7,14 @@ use App\LightPicture;
 
 class Light extends Model
 {
-    public function pictures()
+    public function images()
     {
         return $this->hasMany(LightPicture::class);
     }
     public function lightdelete()
     {
         // delete all related photos 
-        $this->pictures()->delete();
+        $this->images()->delete();
         
         return parent::delete();
     }
