@@ -22,7 +22,7 @@ class PhotoController extends Controller
             {
                 $sum = $image;
                 $coord=$this->read_gps(public_path('\\files\\lights\\').$image);
-                $img=['images' => [public_path('\\files\\lights\\').$image], 'images_ico' => [public_path('\\files\\lights\\ico\\').$image], 'location' => [ $coord['lat'], $coord['lon']]];
+                $img=['images' => [public_path('\\files\\lights\\').$image], 'images_ico' => [public_path('\\files\\lights\\ico\\').$image], 'location' => $coord ];
                 array_push($arr, $img);
             }
         }  
@@ -104,8 +104,8 @@ class PhotoController extends Controller
             $lon = $this->getGps($exif['GPSLongitude'], $exif['GPSLongitudeRef']);
             $lat = $this->getGps($exif['GPSLatitude'], $exif['GPSLatitudeRef']);
             return array(
-                'lat' => $lat,
-                'lon' => $lon
+                $lat,
+                $lon
             );
         }
         return false;
